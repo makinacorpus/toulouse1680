@@ -22,8 +22,6 @@
 
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
 
-  <link href='http://fonts.googleapis.com/css?family=Diplomata+SC' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Jacques+Francois' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Modern+Antiqua' rel='stylesheet' type='text/css'>
   <script src="http://use.edgefonts.net/linden-hill;tangerine.js"></script>
 
@@ -173,6 +171,10 @@
     }
 
     .close:hover { background: #e95642; }
+
+    a:visited,:active {
+      color: #26463a;
+    }
   </style>
 </head>
 <body>
@@ -183,14 +185,14 @@
     </div>
   </div>
   <div id="bottom1">
-    <span style="font-family: tangerine, sans-serif; font-size:25px;">Par <a href="http://makina-corpus.com/">Makina Corpus</a></span>
+    <span style="font-family: tangerine, sans-serif; font-size:23px; font-weight: 600; letter-spacing: 1px;">Par <a href="http://makina-corpus.com/">Makina Corpus</a></span>
   </div>
   <div id="bottom2">
-    <span style="font-family: font-family: 'Modern Antiqua', cursive; font-size:30px;">PLAN DE TOULOUSE</a></span></br>
-    <span style="font-family: font-family: 'Modern Antiqua', cursive; font-size:20px;">En l'An 1680</a></span>
+    <span style="font-family: 'Modern Antiqua', cursive; font-size:30px;">PLAN DE TOULOUSE</a></span></br>
+    <span style="font-family: 'Modern Antiqua', cursive; font-size:20px;">En l'An 1680</a></span>
   </div>
   <div id="bottom3">
-    <span style="font-family: tangerine, sans-serif; font-size:25px;"><a href="#openModal">Sources</a></span>
+    <span style="font-family: tangerine, sans-serif; font-size:23px; font-weight: 600; letter-spacing: 1px;"><a href="#openModal">Sources</a></span>
   </div>
 
   <div id="openModal" class="modalDialog">
@@ -224,10 +226,10 @@
 
     var map = L.map('map', { zoomControl:false, attributionControl:false, maxBounds: [[43.5923,1.4278],[43.6118,1.4528]]});
     map.setView([43.6, 1.44], 16);
-    
+
     // Add Base Layer
     var tilesUrl = 'http://{s}.livembtiles.makina-corpus.net/makina/Toulouse1680/{z}/{x}/{y}.png';
-    L.tileLayer(tilesUrl, {minZoom: 16, maxZoom: 20, subDomains: 'abcdefgh'}).addTo(map);
+    L.tileLayer(tilesUrl, {minZoom: 15, maxZoom: 20, subDomains: 'abcdefgh'}).addTo(map);
   </script>
  </body>
 </html>

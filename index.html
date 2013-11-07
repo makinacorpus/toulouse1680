@@ -222,9 +222,9 @@
   <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
   <script type="text/javascript">
 
-    var map = L.map('map', { zoomControl:false, attributionControl:false, maxBounds: [[43.5829,1.4127],[43.6169,1.4616]]});
+    var map = L.map('map', { zoomControl:false, attributionControl:false, maxBounds: [[43.5923,1.4278],[43.6118,1.4528]]});
     map.setView([43.6, 1.44], 16);
-
+    
     // Add Base Layer
     var tilesUrl = 'http://{s}.livembtiles.makina-corpus.net/makina/Toulouse1680/{z}/{x}/{y}.png';
     L.tileLayer(tilesUrl, {minZoom: 16, maxZoom: 20, subDomains: 'abcdefgh'}).addTo(map);

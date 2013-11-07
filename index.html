@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:og="http://ogp.me/ns#">
+<head>
+  <title>Toulouse en 1680</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plan de Toulouse tel que la ville était construite en 1680." />
+  <meta property="og:title" content="Toulouse en 1680 | Par Makina Corpus" />
+  <!--<meta property="og:description" content="Plan de Toulouse tel que la ville était construite en 1680. Par Makina Corpus." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://tolosa.makina-corpus.com" />
+  <meta property="og:image" content="http://tolosa.makina-corpus.com/screenshot.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@makina_corpus" />
+  <meta name="twitter:creator" content="@fbonifas" />
+  <meta name="twitter:title" content="Toulouse en 1680 | Par Makina Corpus" />
+  <meta name="twitter:description" content="Plan de Toulouse tel que la ville était construite en 1680." />
+  <meta name="twitter:image:src" content="http://tolosa.makina-corpus.com/screenshot.png" />
+  <meta name="twitter:url" content="http://tolosa.makina-corpus.com" />-->
+
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+
+  <link href='http://fonts.googleapis.com/css?family=Diplomata+SC' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Jacques+Francois' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Modern+Antiqua' rel='stylesheet' type='text/css'>
+  <script src="http://use.edgefonts.net/linden-hill;tangerine.js"></script>
+
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.3/leaflet.ie.css" />
+  <![endif]-->
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Georgia', sans-serif;
+      margin: 0;
+      background-color: #dbc57f;
+    }
+
+    body {
+      width: 100%;
+      padding: 2%;
+      padding-bottom: 100px;
+    }
+
+    #frame1 {
+      width: 100%;
+      height: 100%;
+      border:2px solid #33322A;
+      padding: 0.2%;
+    }
+
+    #frame2 {
+      width: 100%;
+      height: 100%;
+      border:2px solid #33322A;
+      position: relative;
+    }
+
+    #floatingFrame {
+      width: 240px;
+      height: 120px;
+      background-color: #dbc57f;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+
+    #bottom1 {
+      margin-top: 10px;
+      width: 30%;
+      height: 80px;
+      left: 0;
+      text-align: center;
+      position: absolute;
+    }
+
+    #bottom2 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 40%;
+      height: 80px;
+      left:30%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      position: absolute;
+      border-left:2px solid #33322A;
+      border-right:2px solid #33322A;
+    }
+
+    #bottom3 {
+      margin-top: 10px;
+      width: 30%;
+      height: 80px;
+      right:0;
+      text-align: center;
+      position: absolute;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      background-color: #dbc57f;
+    }
+
+    .modalDialog {
+      position: absolute;
+      font-family: tangerine, sans-serif;
+      font-size:18px;
+      width: 100%;
+      height: 100%;
+      right: 0;
+      bottom: 100%;
+      left: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 99999;
+      opacity:0;
+      -webkit-transition: opacity 400ms ease-in;
+      -moz-transition: opacity 400ms ease-in;
+      transition: opacity 400ms ease-in;
+    }
+
+    .modalDialog:target {
+      opacity: 1;
+      bottom: 0;
+    }
+
+    .modalDialog > div {
+      width: 400px;
+      position: relative;
+      margin: 10% auto;
+      padding: 5px 20px 13px 20px;
+      border-radius: 10px;
+      background: #ead3ae;
+      max-height: 90%;
+      overflow-y: auto;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      margin: 0 auto;
+      top: 50%;
+      overflow-x: visible;
+    }
+
+    .close {
+      background: #606061;
+      color: #FFFFFF;
+      line-height: 25px;
+      position: absolute;
+      right: 5px;
+      text-align: center;
+      top: 5px;
+      width: 24px;
+      text-decoration: none;
+      font-weight: bold;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
+      -moz-box-shadow: 1px 1px 3px #000;
+      -webkit-box-shadow: 1px 1px 3px #000;
+      box-shadow: 1px 1px 3px #000;
+    }
+
+    .close:hover { background: #e95642; }
+  </style>
+</head>
+<body>
+  <div id="frame1">
+    <div id="frame2">
+      <div id="map">
+      </div>
+    </div>
+  </div>
+  <div id="bottom1">
+    <span style="font-family: tangerine, sans-serif; font-size:25px;">Par <a href="http://makina-corpus.com/">Makina Corpus</a></span>
+  </div>
+  <div id="bottom2">
+    <span style="font-family: font-family: 'Modern Antiqua', cursive; font-size:30px;">PLAN DE TOULOUSE</a></span></br>
+    <span style="font-family: font-family: 'Modern Antiqua', cursive; font-size:20px;">En l'An 1680</a></span>
+  </div>
+  <div id="bottom3">
+    <span style="font-family: tangerine, sans-serif; font-size:25px;"><a href="#openModal">Sources</a></span>
+  </div>
+
+  <div id="openModal" class="modalDialog">
+    <div>
+      <a href="#close" title="Close" class="close">X</a>
+      <h2>Attribution</h2>
+      <p>Données géographiques : <a href="http://data.grandtoulouse.fr/web/guest/les-donnees/-/opendata/card/12514-parcellaire-de-1680"> Open data Toulouse Métropole</a></p>
+      <p>Icônes :
+        <ul>
+          <li><a href="http://thenounproject.com/noun/scissors/#icon-No2585" target="_blank">Scissors</a> designed by <a href="http://thenounproject.com/flavio.gortana" target="_blank">Flavio Gortana</a> from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/meat/#icon-No23422" target="_blank">Meat</a> designed by <a href="http://thenounproject.com/christopherjs" target="_blank">Christopher Scott</a> from The Noun Project</li>
+          <li><a href="http://thenounproject.com/noun/saw/#icon-No1287" target="_blank">Saw</a> designed by <a href="http://thenounproject.com/john.brueggemann" target="_blank">John Brüggemann</a> from The Noun Project</li>
+          <li><a href="http://thenounproject.com/noun/jar/#icon-No3520" target="_blank">Jar</a> designed by <a href="http://thenounproject.com/giulio.bertolotti" target="_blank">Giulio Bertolotti</a> from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/paint-brush/#icon-No4015" target="_blank">Paint Brush</a> designed by <a href="http://thenounproject.com/nilsbyte" target="_blank">Nils</a> from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/key/#icon-No4010" target="_blank">Key</a> designed by <a href="http://thenounproject.com/indur" target="_blank">Bucky Clarke</a> from The Noun Project</li>
+          <li><a href="http://thenounproject.com/noun/leather/#icon-No16499" target="_blank">Leather</a> designed by <a href="http://thenounproject.com/crumenko" target="_blank">Alen Krummenacher</a> from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/bread/#icon-No705" target="_blank">Bread</a>  from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/shirt/#icon-No3312" target="_blank">Shirt</a> designed by <a href="http://thenounproject.com/fusillomaurizio" target="_blank">Maurizio Fusillo</a> from The Noun Project</li>
+          <li><a href="http://thenounproject.com/noun/shoe/#icon-No1222" target="_blank">Shoe</a> designed by <a href="http://thenounproject.com/PKG" target="_blank">Proletkult Graphik</a> from The Noun Project</li>
+          <li><a href="http://thenounproject.com/noun/top-hat/#icon-No7361" target="_blank">Top Hat</a> designed by <a href="http://thenounproject.com/megan.sheehan" target="_blank">Megan Sheehan</a> from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/glove/#icon-No19199" target="_blank">Glove</a> designed by <a href="http://thenounproject.com/dollyvu" target="_blank">Dolly Vu</a> from The Noun Project </li>
+          <li><a href="http://thenounproject.com/noun/horseshoe/#icon-No15759" target="_blank">Horseshoe</a> designed by <a href="http://thenounproject.com/christopherwt11" target="_blank">Christopher Terrill</a> from The Noun Project</li>
+          <li><a href="http://thenounproject.com/noun/ring/#icon-No10501" target="_blank">Ring</a> designed by <a href="http://thenounproject.com/AKS26" target="_blank">Anna Sher</a> from The Noun Project</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+  <script type="text/javascript">
+
+    var map = L.map('map', { zoomControl:false, attributionControl:false, maxBounds: [[43.5829,1.4127],[43.6169,1.4616]]});
+    map.setView([43.6, 1.44], 16);
+
+    // Add Base Layer
+    var tilesUrl = 'http://{s}.livembtiles.makina-corpus.net/makina/Toulouse1680/{z}/{x}/{y}.png';
+    L.tileLayer(tilesUrl, {minZoom: 16, maxZoom: 20, subDomains: 'abcdefgh'}).addTo(map);
+  </script>
+ </body>
+</html>

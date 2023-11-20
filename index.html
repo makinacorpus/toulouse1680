@@ -223,15 +223,18 @@
     </div>
   </div>
 
-  <script src="https://unpkg.com/leaflet@0.6.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/pmtiles@2.5.0/dist/index.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
   <script type="text/javascript">
 
     var map = L.map('map', { zoomControl:false, attributionControl:false, maxBounds: [[43.5874,1.4179],[43.6156,1.4629]]});
     map.setView([43.6, 1.44], 16);
 
     // Add Base Layer
-    var tilesUrl = 'https://{s}.tilestream.makina-corpus.net/v2/toulouse1680/{z}/{x}/{y}.png';
-    L.tileLayer(tilesUrl, {minZoom: 15, maxZoom: 20, subDomains: 'abcdefgh'}).addTo(map);
+    const p = new pmtiles.PMTiles('https://makina-pmtiles.s3-website.fr-par.scw.cloud/tolosa-1680.pmtiles')
+    pmtiles.leafletRasterLayer(p, { minZoom: 15, maxZoom: 20 }).addTo(map)
+
   </script>
 
   <!-- <script>
